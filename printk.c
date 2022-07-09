@@ -1,3 +1,6 @@
+#include "main.h"
+#include ...
+
 /**
  * steps to include. 
  * you ar allowed to copy this file as make changes to any section including this comment section.
@@ -35,4 +38,12 @@
  *          {
  *              calls all specifier functions()
  *          }
+ * 
+ * int printk(const char *format, ...)
+ * 
+ * input characters
+ * count length of characters as len
+ * for (i at len 0, to i at len -1)
+ * if i ==
+ * print out det
  */
