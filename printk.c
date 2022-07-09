@@ -45,7 +45,9 @@
  *  for (i =0, i < len +1)
  *      print characters as putchar(array[n])
  *      
- *      if 
+ *      if i == %
+ *      call func( array[n], len)
+ *      
  *      n++, i++
  *  
  * }
