@@ -11,4 +11,9 @@
  *                      func.c file would contain state() function and spec() function
  *          state() function would check if theres state mentioned the execute action
  *                  else ( just execute spec() function)
+ * 
+ *          spec() and state() functions may include other functions in them or
+ *              have to call the functions.
+ * 
+ * 
  */
