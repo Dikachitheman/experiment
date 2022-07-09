@@ -15,5 +15,24 @@
  *          spec() and state() functions may include other functions in them or
  *              have to call the functions.
  * 
+ * essentially the main functions include
+ *      main()
+ *          {
+ *              calls printk()
+ *          }
  * 
+ * printk()
+ *          {
+ *              if (% = true)
+ *              calls spec() && 
+ *                    state()
+ *          }
+ * state()
+ *          {
+ *              calls all the state function()
+ *          }
+ * spec()
+ *          {
+ *              calls all specifier functions()
+ *          }
  */
