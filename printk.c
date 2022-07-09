@@ -35,4 +35,20 @@
  *          {
  *              calls all specifier functions()
  *          }
+ * 
+ * int printk(const char *format, ...)
+ * {
+ *  enter any length of characters into array[n]
+ * 
+ *  count len of characters = len
+ * 
+ *  for (i =0, i < len +1)
+ *      print characters as putchar(array[n])
+ *      
+ *      if i == %
+ *      call func( array[n], len)
+ *      
+ *      n++, i++
+ *  
+ * }
  */
