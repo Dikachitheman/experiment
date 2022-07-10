@@ -18,6 +18,21 @@ typedef struct print_spec
 	int (*func)(va_list);
 } ps;
 
+int print_char(va_list list);
+int print_str(va_list list);
+int print_int(va_list list);
+int print_binary(va_list list);
+int print_octal(va_list list);
+int print_hex(va_list list);
+int print_HEX(va_list list);
+int print_unsigned(va_list list);
+int print_str_unprintable(va_list list);
+int print_reverse(va_list list);
+int print_address(va_list list);
+int print_rot13(va_list list);
+int print_percent(va_list list __attribute__((unused)));
+int print_number(int n);
+int print_unsigned_number(unsigned int n);
 int _putchar(char c);
 int _printf(const char *format, ...);
 int (*get_func(const char c))(va_list);
