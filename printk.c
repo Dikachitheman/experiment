@@ -59,19 +59,26 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
+
+int _printf(const char *format, ...);
 /**
   *_printf - prints formatted output.
   *input.
   *
   *Return: number of chars printed or -1.
   */
+ int main(void)
+{
+    _printf("vc");
+    return (0);
+}
+
 int _printf(const char *format, ...)
 {
 	va_list args;
     va_start(args, format);
 
 	int i, len;
-	int (*get_ptr)(va_list, int);
 
 	if (!(format))
 		return (-1);
@@ -84,29 +91,19 @@ int _printf(const char *format, ...)
 			i++;
 			if (format[i] == '%')
 			{
-				len += _putchar(format[i]);
+				len += putchar(format[i]);
 				i++;
 				continue;
 			}
 			if (format[i] == '\0')
 				return (-1);
-
-			get_ptr = get_print_func(format[i]);
-			if (get_ptr != NULL)
-				len = get_ptr(args, len);
-			else
-			{
-				len += _putchar(format[i - 1]);
-				len += _putchar(format[i]);
-			}
-			i++;
-		}
-		else
-		{
-			len += _putchar(format[i]);
-			i++;
-		}
-	}
+        }
+        else
+          {
+            putchar(format[i]);
+            i++;
+          }
+    }
 	va_end(args);
 	return (len);
 }
