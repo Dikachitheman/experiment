@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /**
  * steps to include.
  * you ar allowed to copy this file as make changes to any section including this comment section.
@@ -20,6 +21,7 @@
  *          {
  *              calls printk()
  *          }
+ * 
  *
  * printk()
  *          {
@@ -35,9 +37,7 @@
  *          {
  *              calls all specifier functions()
  *          }
-<<<<<<< HEAD
- */
-=======
+ *
  * 
  * int printk(const char *format, ...)
  * {
@@ -55,4 +55,3 @@
  *  
  * }
  */
->>>>>>> main
