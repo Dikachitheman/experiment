@@ -15,8 +15,8 @@
 typedef struct print_spec
 {
 	char *id;
-	int (*func)(va_list);
-} ps;
+	int (*fnspec)(va_list);
+}specptr;
 
 int print_char(va_list list);
 int print_str(va_list list);
@@ -35,6 +35,6 @@ int print_number(int n);
 int print_unsigned_number(unsigned int n);
 int _putchar(char c);
 int _printf(const char *format, ...);
-int (*get_func(const char c))(va_list);
+int (*get_func(const char c))(va_list, int);
 
 #endif

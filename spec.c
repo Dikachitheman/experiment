@@ -1,32 +1,30 @@
-/**
- * get_func - select function for conversion char
- * @c: char to check
- * Return: pointer to function
- */
-int (*get_func(const char c))(va_list)
+#include "main.h"
+
+int (*get_func(const char c))(va_list, int)
 {
-	int i = 0;
-
-	print_spec ps[] = {
-		{"c", print_char},
-		{"i", print_int},
-		{"d", print_int},
-		{"s", print_str},
-		{"b", print_binary},
-		{"o", print_octal},
-		{"x", print_hex},
-		{"X", print_HEX},
-		{"u", print_unsigned},
-		{"S", print_unprintable_str},
-		{"r", print_reverse},
-		{"p", print_address},
-		{"R", print_rot13},
-		{"%", print_percent}
+	specptr functs[] = {
+		{'c', print_char},
+		{'s', print_str},
+		{'d', print_int},
+		{'i', print_int},
+		{'u', print_unsigned_number},
+		{'o', print_octal},
+		{'x', print_hex},
+		{'X', print_HEX},
+		{'R', print_rot13},
+		{'b', print_binary},
+		{'S', print_Str}
 	};
-	int specs = 14;
 
-	for (i = 0; i < specs; i++)
-		if (ps[i].id == c)
-			return (ps[i].func);
+	int i;
+
+	for (i = 0; functs[i].id; i++)
+	{
+		if (c == functs[i].id)
+		{
+			return (functs[i].fnspec);
+		}
+	}
+
 	return (NULL);
 }

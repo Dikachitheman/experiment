@@ -59,6 +59,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "main.h"
 
 int _printf(const char *format, ...);
 /**
@@ -69,7 +70,7 @@ int _printf(const char *format, ...);
   */
  int main(void)
 {
-    _printf("vc");
+    _printf("%d  ");
     return (0);
 }
 
@@ -77,6 +78,8 @@ int _printf(const char *format, ...)
 {
 	va_list args;
     va_start(args, format);
+    int (*get_func)(va_list, int);
+
 
 	int i, len;
 
@@ -97,10 +100,13 @@ int _printf(const char *format, ...)
 			}
 			if (format[i] == '\0')
 				return (-1);
+
+            callspec = get_func(format[i])
+             
         }
         else
           {
-            putchar(format[i]);
+            len = len + putchar(format[i]);
             i++;
           }
     }
