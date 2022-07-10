@@ -13,7 +13,7 @@ int (*get_func(const char c))(va_list, int)
 		{'X', print_HEX},
 		{'R', print_rot13},
 		{'b', print_binary},
-		{'S', print_Str}
+		// {'S', print_Str}
 	};
 
 	int i;
