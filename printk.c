@@ -62,12 +62,8 @@
 #include "main.h"
 
 int _printf(const char *format, ...);
-/**
-  *_printf - prints formatted output.
-  *input.
-  *
-  *Return: number of chars printed or -1.
-  */
+int (*get_func(const char c))(va_list, int);
+
  int main(void)
 {
     _printf("%d  ");
@@ -101,7 +97,11 @@ int _printf(const char *format, ...)
 			if (format[i] == '\0')
 				return (-1);
 
-            callspec = get_func(format[i])
+            get_func(format[i]);
+            if (get_func != 0)
+            {
+                len = get_func(args, len);
+            }
              
         }
         else
