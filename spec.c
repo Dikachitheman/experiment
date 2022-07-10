@@ -2,7 +2,8 @@
 
 int (*get_func)(va_list, char c)
 {
-	specptr functs[] = {
+	specptr functs[] = 
+	{
 		{'c', print_char},
 		{'s', print_str},
 		{'d', print_int},
