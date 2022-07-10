@@ -20,6 +20,6 @@ typedef struct print_spec
 
 int _putchar(char c);
 int _printf(const char *format, ...);
-int (*get_func(const char id))(va_list);
+int (*get_func(const char c))(va_list);
 
 #endif
