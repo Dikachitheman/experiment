@@ -61,22 +61,24 @@
 #include <stdio.h>
 #include "main.h"
 
-int _printf(const char *format, ...);
+int printk(const char *format, ...);
 int (*get_func(const char c))(va_list, int);
+int ge;
 
  int main(void)
 {
-    _printf("%d  ");
+    printk("%d", 99);
     return (0);
 }
 
-int _printf(const char *format, ...)
+int printk(const char *format, ...)
 {
+    // syntax: va_arg(args, type)
+
 	va_list args;
     va_start(args, format);
     int (*get_func)(va_list, int);
-
-
+    
 	int i, len;
 
 	if (!(format))
@@ -97,19 +99,27 @@ int _printf(const char *format, ...)
 			if (format[i] == '\0')
 				return (-1);
 
-            get_func(format[i]);
-            if (get_func != 0)
-            {
-                len = get_func(args, len);
-            }
-             
-        }
-        else
-          {
-            len = len + putchar(format[i]);
-            i++;
-          }
+            ge = get_func(args, format[i]);
+            if (ge == -1 || ge != 0)
+			    i++;
+		    if (ge > 0)
+			    len += ge;
+
+            if (ge == 0)
+		    {
+			putchar('%');
+			ge++;
+		    }
+        }    
+        
+            else
+              {
+                len = len + putchar(format[i]);
+                i++;
+              }
+        
     }
+
 	va_end(args);
 	return (len);
 }

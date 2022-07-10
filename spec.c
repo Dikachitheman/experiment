@@ -1,6 +1,6 @@
 #include "main.h"
 
-int (*get_func(const char c))(va_list, int)
+int (*get_func)(va_list, char c)
 {
 	specptr functs[] = {
 		{'c', print_char},
@@ -28,3 +28,36 @@ int (*get_func(const char c))(va_list, int)
 
 	return (NULL);
 }
+
+
+
+
+
+
+// int i = 0, j = 0, first_index;
+
+// 	first_index = index;
+// 	while (functs[i].id)
+// 	{
+// 		if (functs[index] == functs[i].id[j])
+// 		{
+// 			if (functs[i].id[j + 1] != '\0')
+// 				index++, j++;
+// 			else
+// 				break;
+// 		}
+// 		else
+// 		{
+// 			j = 0;
+// 			i++;
+// 			index = first_index;
+// 		}
+// 	}
+// 	return (functs[i].fnspec);
+
+
+// typedef struct print_spec
+// {
+// 	char *id;
+// 	int (*fnspec)(va_list);
+// }specptr;
