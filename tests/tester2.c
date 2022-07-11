@@ -54,11 +54,18 @@ int print_percent(va_list args)
 
 int print_string(va_list args)
 {
-	char *s = va_arg(args, char *);
+int i;
+char *str = va_arg(args, char*);
 
-	if (!s)
-		s = "(null)";
-	return (puts(s));
+if (str == NULL)
+	str = "(null)";
+else if (*str == '\0')
+	return (-1);
+
+for (i = 0; str[i]; i++)
+	putchar(str[i]);
+
+return (i);
 }
 
 int printk(const char *format, ...)
@@ -109,32 +116,12 @@ int main(void)
 	unsigned int ui;
 	void *addr;
 
-	len = printk("Let's try to printf a simple sentence.\n");
-	len2 = printf("Let's try to printf a simple sentence.\n");
-	ui = (unsigned int)INT_MAX + 1024;
-	addr = (void *)0x7ffe637541f0;
-	printk("Length:[%d, %i]\n", len, len);
-	printf("Length:[%d, %i]\n", len2, len2);
-	printk("Negative:[%d]\n", -762534);
-	printf("Negative:[%d]\n", -762534);
-	printk("Unsigned:[%u]\n", ui);
-	printf("Unsigned:[%u]\n", ui);
-	printk("Unsigned octal:[%o]\n", ui);
-	printf("Unsigned octal:[%o]\n", ui);
-	printk("Unsigned hexadecimal:[%x, %X]\n", ui, ui);
-	printf("Unsigned hexadecimal:[%x, %X]\n", ui, ui);
+	
 	printk("Character:[%c]\n", 'H');
 	printf("Character:[%c]\n", 'H');
 	printk("String:[%s]\n", "I am a string !");
 	printf("String:[%s]\n", "I am a string !");
-	printk("Address:[%p]\n", addr);
-	printf("Address:[%p]\n", addr);
-	len = printk("Percent:[%%]\n");
-	len2 = printf("Percent:[%%]\n");
-	printk("Len:[%d]\n", len);
-	printf("Len:[%d]\n", len2);
-	printk("Unknown:[%r]\n");
-	printf("Unknown:[%r]\n");
+	
 
         return (0);
 }
