@@ -39,7 +39,7 @@ int print_reverse(va_list args);
 int print_rot13(va_list args);
 
 /* print_percent */
-int print_percent(va_list args);
+int print_percent(va_list args __attribute__((unused)));
 
 /* print_address */
 int print_address(va_list args);
