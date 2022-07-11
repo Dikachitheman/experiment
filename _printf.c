@@ -26,7 +26,7 @@ int _printf(const char *format, ...)
 				func = print_spec(format[i + 1]);
 			if (func == NULL)
 			{
-				_putchar(format[i]);
+				putchar(format[i]);
 				len++;
 				i++;
 			}
@@ -39,7 +39,7 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			_putchar(format[i]);
+			putchar(format[i]);
 			len++;
 			i++;
 		}

@@ -17,7 +17,7 @@ int print_string(va_list args)
 		return (-1);
 
 	for (i = 0; str[i]; i++)
-		_putchar(str[i]);
+		putchar(str[i]);
 
 	return (i);
 }
@@ -36,6 +36,6 @@ int print_char(va_list args)
 	{
 		return (write(1, &c, 1));
 	}
-	_putchar(c);
+	putchar(c);
 	return (1);
 }
