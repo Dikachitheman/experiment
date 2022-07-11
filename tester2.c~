@@ -6,16 +6,15 @@
 
 int print_char(va_list args);
 int print_percent(va_list args);
-char *convert(unsigned long int num, int base, int lowercase);
 
 typedef struct print_spec
 {
-	char id;
+	char *id;
 	int (*fnspec)(va_list);
 
 }specptr;
 
-int (*spec(char c))(va_list)
+int (*print_spec(char c))(va_list)
 {
         specptr functs_arr[] = {
 		{"c", print_char},
@@ -26,7 +25,7 @@ int (*spec(char c))(va_list)
         register int i;
 
         for (i = 0; i < flags; i++)
-		if (functs_arr[i].id == c)
+		if (functs_arr[i].id[0] == c)
 			return (functs_arr[i].fnspec);
 	return (NULL);
 }
@@ -51,20 +50,20 @@ int print_percent(va_list args)
 
 int printk(const char *format, ...)
 {
+	va_list args;
+	int val = 0, i = 0;
 	int (*func)(va_list);
-        va_list args;
-	int i = 0, val = 0;
 
 	if (!format || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
-        va_start(args, format);
+	va_start(args, format);
 
-        while (format[i])
+	while (format[i])
 	{
 		if (format[i] == '%')
 		{
 			if (format[i + 1] != '\0')
-				func = spec(format[i + 1]);
+				func = print_spec(format[i + 1]);
 			if (func == NULL)
 			{
 				putchar(format[i]);
@@ -91,28 +90,20 @@ int printk(const char *format, ...)
 
 int main(void)
 {
+	int len;
+	int len2;
+
 	printk("Character:[%c]", 'H');
         printf("\n");
 	printf("Character:[%c]", 'H');
 	printf("\n");
+	len = printk("Percent:[%%]");
+	printf("\n");
+	printk("\n");
+	len2 = printf("Percent:[%%]");
+	printf("\n");
+	printk("\n");
+	printk(NULL);
+	printf(NULL);
         return (0);
-}
-
-char *convert(unsigned long int num, int base, int lowercase)
-{
-	static char *rep;
-	static char buffer[50];
-	char *ptr;
-
-	rep = (lowercase)
-		? "0123456789abcdef"
-		: "0123456789ABCDEF";
-	ptr = &buffer[49];
-	*ptr = '\0';
-	do {
-		*--ptr = rep[num % base];
-		num /= base;
-	} while (num != 0);
-
-	return (ptr);
 }

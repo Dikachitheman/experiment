@@ -34,11 +34,11 @@ int main(void)
     printf("String:[%s]\n", "I am a string !");
     printk("Address:[%p]\n", addr);
     printf("Address:[%p]\n", addr);
-    len = printk("Percent:[%%]\n");
+    len = _print("Percent:[%%]\n");
     len2 = printf("Percent:[%%]\n");
     printk("Len:[%d]\n", len);
     printf("Len:[%d]\n", len2);
-   printk("Unknown:[%r]\n");
+    printk("Unknown:[%r]\n");
     printf("Unknown:[%r]\n");
     return (0);
 }

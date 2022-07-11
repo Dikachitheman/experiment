@@ -2,7 +2,7 @@
 
 int (*get_func)(va_list, char c)
 {
-	specptr functs[] = 
+	specptr functs[] =
 	{
 		{'c', print_char},
 		{'s', print_str},
@@ -14,6 +14,7 @@ int (*get_func)(va_list, char c)
 		{'X', print_HEX},
 		{'R', print_rot13},
 		{'b', print_binary},
+		{'%', print_percent}
 		// {'S', print_Str}
 	};
 
