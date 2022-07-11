@@ -1,26 +1,29 @@
 #include "main.h"
 
 /**
- * _printf - Reproduce behaviour of printf function from the standard library
- * @format: format string
+ * _printf - produces output according to a format
+ * @format: format string containing the characters and the specifiers
+ * Description: this function will call the print_spec() function that will
+ * determine which printing function to call depending on the conversion
+ * specifiers contained into format
  * Return: value of printed chars
  */
 int _printf(const char *format, ...)
 {
-	va_list list;
+	va_list args;
 	int len = 0, i = 0;
-	int (*func)();
+	int (*func)(va_list);
 
 	if (!format || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
-	va_start(list, format);
+	va_start(args, format);
 
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
 			if (format[i + 1] != '\0')
-				func = get_func(format[i + 1]);
+				func = print_spec(format[i + 1]);
 			if (func == NULL)
 			{
 				_putchar(format[i]);
@@ -29,7 +32,7 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				len += func(list);
+				len += func(args);
 				i += 2;
 				continue;
 			}
@@ -41,6 +44,6 @@ int _printf(const char *format, ...)
 			i++;
 		}
 	}
-	va_end(list);
+	va_end(args);
 	return (len);
 }

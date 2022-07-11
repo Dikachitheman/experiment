@@ -8,11 +8,18 @@
  */
 int print_string(va_list args)
 {
-	char *s = va_arg(args, char *);
+	int i;
+	char *str = va_arg(args, char *);
 
-	if (!s)
-		s = "(null)";
-	return (_puts(s));
+	if (str == NULL)
+		str = "(null)";
+	else if (*str == '\0')
+		return (-1);
+
+	for (i = 0; str[i]; i++)
+		_putchar(str[i]);
+
+	return (i);
 }
 
 /**
