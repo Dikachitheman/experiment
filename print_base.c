@@ -46,4 +46,6 @@ int print_binary(va_list args)
 		}
         k++;
 	}
+
+    free(ar);
 }
