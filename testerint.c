@@ -6,6 +6,7 @@
 
 int print_char(va_list args);
 int print_percent(va_list args);
+int print_int(va_list args);
 
 typedef struct print_spec
 {
@@ -17,10 +18,12 @@ typedef struct print_spec
 int (*print_spec(char c))(va_list)
 {
         specptr functs_arr[] = {
-		{"c", print_char},
-                {"%", print_percent}
+				{"c", print_char},
+                {"%", print_percent},
+				{"d", print_int},
+				{"i", print_int}
         };
-	int flags = 2;
+	int flags = 4;
 
         register int i;
 
@@ -28,6 +31,32 @@ int (*print_spec(char c))(va_list)
 		if (functs_arr[i].id[0] == c)
 			return (functs_arr[i].fnspec);
 	return (NULL);
+}
+
+int print_int(va_list args)
+{
+
+	unsigned int divisor = 1, i, resp;
+	int c = 0;
+	int n = va_arg(args, int);
+	if (n < 0)
+	{
+		putchar('-');
+		c++;
+		n *= -1;
+	}
+
+	for (i = 0; n / divisor > 9; i++, divisor *= 10);
+	
+	for (; divisor >= 1; n %= divisor, divisor /= 10, c++)
+	{
+		resp = n / divisor;
+		putchar('0' + resp);
+		
+	}
+
+	return (c);
+	
 }
 
 int print_char(va_list args)
@@ -96,32 +125,15 @@ int main(void)
     unsigned int ui;
     void *addr;
 
-    // len = printk("Let's try to printf a simple sentence.\n");
+    len = printk("Let's try to printf a simple sentence.\n");
     len2 = printf("Let's try to printf a simple sentence.\n");
     ui = (unsigned int)INT_MAX + 1024;
     addr = (void *)0x7ffe637541f0;
     // printk("Length:[%d, %i]\n", len, len);
     printf("Length:[%d, %i]\n", len2, len2);
-    // printk("Negative:[%d]\n", -762534);
+    printk("Negative:[%d]\n", -762534);
     printf("Negative:[%d]\n", -762534);
-//     printk("Unsigned:[%u]\n", ui);
-//     printf("Unsigned:[%u]\n", ui);
-//     printk("Unsigned octal:[%o]\n", ui);
-//     printf("Unsigned octal:[%o]\n", ui);
-//     printk("Unsigned hexadecimal:[%x, %X]\n", ui, ui);
-//     printf("Unsigned hexadecimal:[%x, %X]\n", ui, ui);
-//     printk("Character:[%c]\n", 'H');
-//     printf("Character:[%c]\n", 'H');
-//     printk("String:[%s]\n", "I am a string !");
-//     printf("String:[%s]\n", "I am a string !");
-//     printk("Address:[%p]\n", addr);
-//     printf("Address:[%p]\n", addr);
-//     len = printk("Percent:[%%]\n");
-//     len2 = printf("Percent:[%%]\n");
-//     printk("Len:[%d]\n", len);
-//     printf("Len:[%d]\n", len2);
-//    printk("Unknown:[%r]\n");
-//     printf("Unknown:[%r]\n");
+
 
         return (0);
 }
