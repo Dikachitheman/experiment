@@ -2,7 +2,7 @@
 
 /**
  * print_percent - prints percent character [%]
- * args: char
+ * args: va_list args from _printf
  * Return: percent character
  */
 int print_percent(va_list args __attribute__((unused)))
