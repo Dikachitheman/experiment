@@ -8,7 +8,6 @@
 int print_char(va_list args);
 int print_percent(va_list args);
 int print_string(va_list args);
-int print_buf(char *buf, unsigned int nbuf);
 
 typedef struct print_spec
 {
@@ -54,18 +53,18 @@ int print_percent(va_list args)
 
 int print_string(va_list args)
 {
-int i;
-char *str = va_arg(args, char*);
+	int i;
+	char *str = va_arg(args, char*);
 
-if (str == NULL)
-	str = "(null)";
-else if (*str == '\0')
-	return (-1);
+	if (str == NULL)
+		str = "(null)";
+	else if (*str == '\0')
+		return (-1);
 
-for (i = 0; str[i]; i++)
-	putchar(str[i]);
+	for (i = 0; str[i]; i++)
+		putchar(str[i]);
 
-return (i);
+	return (i);
 }
 
 int printk(const char *format, ...)
@@ -111,17 +110,10 @@ int printk(const char *format, ...)
 
 int main(void)
 {
-	int len;
-	int len2;
-	unsigned int ui;
-	void *addr;
-
-	
 	printk("Character:[%c]\n", 'H');
 	printf("Character:[%c]\n", 'H');
 	printk("String:[%s]\n", "I am a string !");
 	printf("String:[%s]\n", "I am a string !");
-	
 
         return (0);
 }
