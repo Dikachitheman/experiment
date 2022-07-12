@@ -11,6 +11,8 @@ int print_binary(va_list args);
 int print_string(va_list args);
 int print_unsigned(va_list arg);
 int print_oct(va_list arg);
+int print_hex(va_list args);
+int print_Hex(va_list args);
 
 
 typedef struct print_spec
@@ -28,9 +30,11 @@ int (*print_spec(char c))(va_list)
         {"%", print_percent},
 		{"b", print_binary},
 		{"u", print_unsigned},
-		{"o", print_oct}
+		{"o", print_oct},
+		{"x", print_hex},
+		{"X", print_Hex}
         };
-	int flags = 7;
+	int flags = 9;
 
         register int i;
 
@@ -176,6 +180,60 @@ int print_oct(va_list arg)
 	return (charPrinted);
 }
 
+int print_Hex(va_list args)
+{
+	unsigned int num = va_arg(args, unsigned int);
+	char c = 'X';
+	unsigned int num2;
+	int i, j, remainder, nbrCharacters = 0;
+	char *numhex;
+
+	for (num2 = num; num2 != 0; nbrCharacters++, num2 /= 16)
+	;
+
+	numhex = malloc(nbrCharacters);
+	for (i = 0; num != 0; i++)
+	{
+		remainder = num % 16;
+		if (remainder < 10)
+			numhex[i] = remainder + '0';
+		else
+			numhex[i] = remainder - 10 + c;
+		num = num / 16;
+	}
+	for (j = i - 1; j >= 0; j--)
+		putchar(numhex[j]);
+	free(numhex);
+	return (nbrCharacters);
+}
+
+int print_hex(va_list args)
+{
+	unsigned int num = va_arg(args, unsigned int);
+	char c = 'x';
+	unsigned int num2;
+	int i, j, remainder, nbrCharacters = 0;
+	char *numhex;
+
+	for (num2 = num; num2 != 0; nbrCharacters++, num2 /= 16)
+	;
+
+	numhex = malloc(nbrCharacters);
+	for (i = 0; num != 0; i++)
+	{
+		remainder = num % 16;
+		if (remainder < 10)
+			numhex[i] = remainder + '0';
+		else
+			numhex[i] = remainder - 10 + c;
+		num = num / 16;
+	}
+	for (j = i - 1; j >= 0; j--)
+		putchar(numhex[j]);
+	free(numhex);
+	return (nbrCharacters);
+}
+
 int printk(const char *format, ...)
 {
 	va_list args;
@@ -224,6 +282,10 @@ int main(void)
 	printf("Character:[%c]\n", 'H');
 	// printk("String:[%b]\n", 4);
 	printf("String:[%s]\n", "I am a string !");
+	{
+   printk("Unsigned hexadecimal:[%x, %X]\n", 4567, 4567);
+	printf("Unsigned hexadecimal:[%x, %X]\n", 4567, 4567);
+}
 
         return (0);
 }
