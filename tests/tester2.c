@@ -9,6 +9,7 @@ int print_char(va_list args);
 int print_percent(va_list args);
 int print_binary(va_list args);
 int print_string(va_list args);
+int print_unsigned(va_list arg);
 
 
 typedef struct print_spec
@@ -24,9 +25,10 @@ int (*print_spec(char c))(va_list)
 		{"c", print_char},
 		{"s", print_string},
         {"%", print_percent},
-		{"b", print_binary}
+		{"b", print_binary},
+		{"u", print_unsigned}
         };
-	int flags = 4;
+	int flags = 5;
 
         register int i;
 
@@ -116,6 +118,28 @@ int print_binary(va_list args)
 	}
 }
 
+/**
+ * print_unsigned - prints an unsigned int.
+ * @arg: argument
+ * Return: 0
+ */
+
+int print_unsigned(va_list arg)
+{
+int divisor = 1, i, resp;
+unsigned int n = va_arg(arg, unsigned int);
+
+for (i = 0; n / divisor > 9; i++, divisor *= 10)
+;
+
+for (; divisor >= 1; n %= divisor, divisor /= 10)
+{
+	resp = n / divisor;
+	putchar('0' + resp);
+}
+return (i + 1);
+}
+
 int printk(const char *format, ...)
 {
 	va_list args;
@@ -159,9 +183,9 @@ int printk(const char *format, ...)
 
 int main(void)
 {
-	printk("Character:[%b]\n", 9);
+	printf("Character:[%u]\n", -89);
 	printf("Character:[%c]\n", 'H');
-	printk("String:[%b]\n", 4);
+	// printk("String:[%b]\n", 4);
 	printf("String:[%s]\n", "I am a string !");
 
         return (0);
