@@ -8,9 +8,8 @@
  */
 int print_hex(va_list args)
 {
-	unsigned int num = va_arg(args, unsigned int);
-    unsigned int num2;
-    char c = 'x';
+    unsigned int num = va_arg(args, unsigned int);
+    unsigned int num2;    char c = 'x';
 	int i, j, remainder, nbrCharacters = 0;
 	char *numhex;
 
