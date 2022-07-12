@@ -1,51 +1,85 @@
 #include "main.h"
 
-
+/**
+ * print_oct - prints number in octal base.
+ * @arg: list containing octal number to be printed
+ * Return: number of octals printed
+ */
 
 int print_binary(va_list args)
 {
-	int n = va_arg(args, int);
-	int b = 1, i, j, len = 0;
-	int *ar;
-	ar = (int*)malloc(n * sizeof(char));
+	unsigned int num = va_arg(args, unsigned int);
+	unsigned int copy;
+	char *octa;
+	int i, j, charPrinted = 0;
 
-	for (i = 0; b < n ; i++)
-		{
-			ar[i] = b;
-			b = b * 2;
-			len++;
-		}
-
-	// for (i = 0; i < len; i++)
-	// 	{
-	// 		if (ar[i])
-	// 		{
-	// 			printf("%d, %d, %d\n", ar[i], b, len);
-	// 		}
-	// 	}
-
-		// printf("\n");
-
-	int dif = n;
-	int p, k = 1, u = 0;
-	int pr[len];
-
-	for (u; u < len; u++)
+	if (num == 0)
+		return (putchar('0'));
+	for (copy = num; copy != 0; j++)
 	{
-		pr[j] = dif;
-		if (dif >= ar[len - k])
-		{
-			dif = dif - ar[len - k];
-			pr[j] = dif;
-			putchar('0' + 1);
-			j++;
-		}
-		else 
-		{
-			putchar('0' + 0);
-		}
-        k++;
+		copy = copy / 2;
+	}
+	octa = malloc(j);
+	if (!octa)
+		return (-1);
+
+	for (i = j - 1; i >= 0; i--)
+	{
+		octa[i] = num % 2 + '0';
+		num = num / 2;
 	}
 
-    free(ar);
+	for (i = 0; i < j && octa[i] == '0'; i++)
+		;
+	for (; i < j; i++)
+	{
+		putchar(octa[i]);
+		charPrinted++;
+	}
+	free(octa);
+	return (charPrinted);
+}
+
+
+
+#include "main.h"
+
+/**
+ * print_oct - prints number in octal base.
+ * @arg: list containing octal number to be printed
+ * Return: number of octals printed
+ */
+
+int print_oct(va_list args)
+{
+	unsigned int num = va_arg(args, unsigned int);
+	unsigned int copy;
+	char *octa;
+	int i, j, charPrinted = 0;
+
+	if (num == 0)
+		return (putchar('0'));
+	for (copy = num; copy != 0; j++)
+	{
+		copy = copy / 8;
+	}
+	octa = malloc(j);
+	if (!octa)
+		return (-1);
+
+	for (i = j - 1; i >= 0; i--)
+	{
+		octa[i] = num % 8 + '0';
+		num = num / 8;
+	}
+
+	for (i = 0; i < j && octa[i] == '0'; i++)
+		;
+	for (; i < j; i++)
+	{
+		putchar(octa[i]);
+		charPrinted++;
+	}
+	free(octa);
+	return (charPrinted);
 }
