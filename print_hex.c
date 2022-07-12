@@ -9,13 +9,13 @@
 int print_hex(va_list args)
 {
 	unsigned int num = va_arg(args, unsigned int);
-    unsigned int num2;
-    char c = 'x';
+	unsigned int num2;
+	char c = 'x';
 	int i, j, remainder, nbrCharacters = 0;
 	char *numhex;
 
 	for (num2 = num; num2 != 0; nbrCharacters++, num2 /= 16)
-	;
+		;
 
 	numhex = malloc(nbrCharacters);
 	for (i = 0; num != 0; i++)
@@ -35,6 +35,6 @@ int print_hex(va_list args)
 
 int main()
 {
-   _printf("Unsigned hexadecimal:[%x, %X]\n", 987, 987);
+	_printf("Unsigned hexadecimal:[%x, %X]\n", 987, 987);
 	printf("Unsigned hexadecimal:[%x, %X]\n", 987, 987);
 }

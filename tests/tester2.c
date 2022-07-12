@@ -27,7 +27,7 @@ int (*print_spec(char c))(va_list)
         specptr functs_arr[] = {
 		{"c", print_char},
 		{"s", print_string},
-        {"%", print_percent},
+		{"%", print_percent},
 		{"b", print_binary},
 		{"u", print_unsigned},
 		{"o", print_oct},
@@ -116,7 +116,7 @@ int print_binary(va_list args)
 			putchar('0' + 1);
 			j++;
 		}
-		else 
+		else
 		{
 			putchar('0' + 0);
 		}
@@ -277,20 +277,14 @@ int printk(const char *format, ...)
 
 int main(void)
 {
-	printf("Character:[%o]\n", 89);
-	printk("Character:[%o]\n", 89);
+	printf("Character:[%u]\n", 89);
+	printk("Character:[%u]\n", -89);
 	printf("Character:[%c]\n", 'H');
-	// printk("String:[%b]\n", 4);
+	printk("Binary:[%b]\n", 4);
 	printf("String:[%s]\n", "I am a string !");
-<<<<<<< HEAD
 	printk("Percent:[%%%%]\n");
 	printf("Percent:[%%%%]\n");
-=======
-	{
-   printk("Unsigned hexadecimal:[%x, %X]\n", 4567, 4567);
+	printk("Unsigned hexadecimal:[%x, %X]\n", 4567, 4567);
 	printf("Unsigned hexadecimal:[%x, %X]\n", 4567, 4567);
-}
-
->>>>>>> 2a5e97c0b84ee4927027e1064b8f6e56b2df72d5
         return (0);
 }
