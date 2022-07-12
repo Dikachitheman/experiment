@@ -18,7 +18,7 @@ int print_oct(unsigned int num)
 		return (putchar('0'));
 	for (copy = num; copy != 0; j++)
 	{
-		copy = copy / 2;
+		copy = copy / 16;
 	}
 	octa = malloc(j);
 	if (!octa)
@@ -26,12 +26,11 @@ int print_oct(unsigned int num)
 
 	for (i = j - 1; i >= 0; i--)
 	{
-		octa[i] = num % 2 + '0';
-		num = num / 2;
+		octa[i] = num % 16 + '0';
+		num = num / 16;
 	}
 
-	for (i = 0; i < j && octa[i] == '0'; i++)
-		;
+	for (i = 0; i < j && octa[i] == '0'; i++);
 	for (; i < j; i++)
 	{
 		putchar(octa[i]);
@@ -43,8 +42,8 @@ int print_oct(unsigned int num)
 
 int main()
 {
-    print_oct(98);
+    print_oct(56789);
     printf("\n");
-    printf("%b", 56789);
+    printf("%x", 56789);
     return 0;
 }
