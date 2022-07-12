@@ -10,6 +10,7 @@ int print_percent(va_list args);
 int print_binary(va_list args);
 int print_string(va_list args);
 int print_unsigned(va_list arg);
+int print_oct(va_list arg);
 
 
 typedef struct print_spec
@@ -26,9 +27,10 @@ int (*print_spec(char c))(va_list)
 		{"s", print_string},
         {"%", print_percent},
 		{"b", print_binary},
-		{"u", print_unsigned}
+		{"u", print_unsigned},
+		{"o", print_oct}
         };
-	int flags = 5;
+	int flags = 7;
 
         register int i;
 
@@ -140,6 +142,40 @@ for (; divisor >= 1; n %= divisor, divisor /= 10)
 return (i + 1);
 }
 
+int print_oct(va_list arg)
+{
+	unsigned int num = va_arg(arg, unsigned int);
+	unsigned int copy;
+	char *octa;
+	int i, j, charPrinted = 0;
+
+	if (num == 0)
+		return (putchar('0'));
+	for (copy = num; copy != 0; j++)
+	{
+		copy = copy / 8;
+	}
+	octa = malloc(j);
+	if (!octa)
+		return (-1);
+
+	for (i = j - 1; i >= 0; i--)
+	{
+		octa[i] = num % 8 + '0';
+		num = num / 8;
+	}
+
+	for (i = 0; i < j && octa[i] == '0'; i++)
+		;
+	for (; i < j; i++)
+	{
+		putchar(octa[i]);
+		charPrinted++;
+	}
+	free(octa);
+	return (charPrinted);
+}
+
 int printk(const char *format, ...)
 {
 	va_list args;
@@ -183,7 +219,8 @@ int printk(const char *format, ...)
 
 int main(void)
 {
-	printf("Character:[%u]\n", -89);
+	printf("Character:[%o]\n", 89);
+	printk("Character:[%o]\n", 89);
 	printf("Character:[%c]\n", 'H');
 	// printk("String:[%b]\n", 4);
 	printf("String:[%s]\n", "I am a string !");
