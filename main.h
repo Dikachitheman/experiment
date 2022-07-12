@@ -27,6 +27,9 @@ int print_string(va_list args);
 int print_int(va_list args);
 int print_unsigned(va_list args);
 
+/* converter */
+char *convert(unsigned long int num, int base, int lowercase);
+
 /* print_bases */
 int print_binary(va_list args);
 int print_octal(va_list args);
@@ -34,7 +37,7 @@ int print_hex(va_list args);
 int print_HEX(va_list args);
 
 /* print_custom */
-int print_str_unprintable(va_list args);
+int print_S(va_list args);
 int print_reverse(va_list args);
 int print_rot13(va_list args);
 
@@ -44,10 +47,9 @@ int print_percent(va_list args __attribute__((unused)));
 /* print_address */
 int print_address(va_list args);
 
-int print_number(int n);
-int print_unsigned_number(unsigned int n);
 /* write_functions */
 int _putchar(char c);
+int _puts(char *str);
 
 /* _printf */
 int _printf(const char *format, ...);
