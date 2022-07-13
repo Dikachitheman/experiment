@@ -13,16 +13,22 @@
 int (*print_spec(char c))(va_list)
 {
 	specptr functs_arr[] = {
-		{"c", print_char},
-		{"s", print_string},
-		{"%", print_percent},
-		{"d", print_int},
-		{"i", print_int},
-		{"S", print_S},
-		{"r", print_reverse},
-		{"R", print_rot13}
-	};
-	int flags = 8;
+		{"b", print_binary},
+		{"o", print_octal},
+		{"x", print_hex},
+		{"X", print_HEX},
+		{"u", print_unsigned}
+/**
+ *		{"c", print_char},
+ *		{"s", print_string},
+ *		{"%", print_percent},
+ *		{"d", print_int},
+ *		{"i", print_int},
+ *		{"S", print_S},
+ *		{"r", print_reverse},
+ *		{"R", print_rot13}
+ */	};
+	int flags = 5;
 
 	register int i;
 
